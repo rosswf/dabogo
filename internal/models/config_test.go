@@ -16,7 +16,7 @@ func TestLoad(t *testing.T) {
     `
 	d := strings.NewReader(data)
 
-	cfg := New()
+	cfg := NewConfig()
 	cfg.Load(d)
 
 	want := &Config{
@@ -42,7 +42,7 @@ func TestLoadMalformed(t *testing.T) {
 
 	d := strings.NewReader(data)
 
-	cfg := New()
+	cfg := NewConfig()
 	err := cfg.Load(d)
 
 	if err == nil {
@@ -56,7 +56,7 @@ func TestLoadEmpty(t *testing.T) {
 
 	d := strings.NewReader(data)
 
-	cfg := New()
+	cfg := NewConfig()
 	err := cfg.Load(d)
 
 	if err == nil {
