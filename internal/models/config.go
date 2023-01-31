@@ -42,9 +42,7 @@ func (c *Config) Load(r io.Reader) error {
 
 func (c *Config) checkLinks() error {
 	for _, link := range c.Links {
-		if link.Name == "" || link.Url == "" {
-			return fmt.Errorf("Missing link information %v", link)
-		}
+		return link.checkRequired()
 	}
 	return nil
 }

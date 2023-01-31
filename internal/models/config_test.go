@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 	"testing"
@@ -45,8 +44,6 @@ func TestLoadMalformed(t *testing.T) {
 
 	cfg := New()
 	err := cfg.Load(d)
-
-	fmt.Println(cfg)
 
 	if err == nil {
 		t.Errorf("Expected an error when parsing yaml")
