@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/rosswf/dabogo/internal/models"
+	"github.com/rosswf/dabogo/ui"
 )
 
 type application struct {
@@ -32,8 +33,11 @@ func main() {
 		template: template,
 	}
 
+	fileServer := http.FileServer(http.FS(ui.Files))
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", app.home)
+	mux.Handle("/static/", fileServer)
 
 	http.ListenAndServe(":8080", mux)
 }
