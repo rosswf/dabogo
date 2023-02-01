@@ -23,6 +23,9 @@ func main() {
 	cfg.Load(f)
 
 	template, err := newTemplate()
+	if err != nil {
+		panic(err)
+	}
 
 	app := application{
 		config:   cfg,
