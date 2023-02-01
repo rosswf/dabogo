@@ -1,6 +1,7 @@
 package main
 
 import (
+	"html/template"
 	"net/http"
 	"os"
 
@@ -8,7 +9,8 @@ import (
 )
 
 type application struct {
-	config *models.Config
+	config   *models.Config
+	template *template.Template
 }
 
 func main() {
@@ -20,8 +22,11 @@ func main() {
 	cfg := models.NewConfig()
 	cfg.Load(f)
 
+	template, err := newTemplate()
+
 	app := application{
-		config: cfg,
+		config:   cfg,
+		template: template,
 	}
 
 	mux := http.NewServeMux()

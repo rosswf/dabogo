@@ -11,6 +11,11 @@ import (
 )
 
 func TestHomeHandler(t *testing.T) {
+	template, err := newTemplate()
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	app := application{
 		config: &models.Config{
 			Links: []models.Link{
@@ -24,6 +29,7 @@ func TestHomeHandler(t *testing.T) {
 				},
 			},
 		},
+		template: template,
 	}
 
 	w := httptest.NewRecorder()
