@@ -4,10 +4,12 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+
+	"github.com/rosswf/dabogo/ui"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	ts, err := template.ParseGlob("/home/ross/dev/golang/github.com/rosswf/dabogo/ui/html/*.tmpl")
+	ts, err := template.ParseFS(ui.Files, "html/*.tmpl")
 	if err != nil {
 		log.Print(err)
 		return
