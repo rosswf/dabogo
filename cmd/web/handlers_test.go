@@ -61,7 +61,14 @@ func TestHomeHandler(t *testing.T) {
 		t.Errorf("got: %s, want: %s", got, want)
 	}
 
+	// Check that response body contains "https://bbc.co.co.uk"
 	want = "https://bbc.co.uk"
+	if !strings.Contains(got, want) {
+		t.Errorf("got: %s, want: %s", got, want)
+	}
+
+	// Check that response body contains "<!DOCTYPE html>"
+	want = "<!DOCTYPE html>"
 	if !strings.Contains(got, want) {
 		t.Errorf("got: %s, want: %s", got, want)
 	}

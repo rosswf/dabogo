@@ -1,5 +1,16 @@
 {{define "home"}}
-{{range .Links}}
-{{template "link" .}}
-{{end}}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Dabogo</title>
+    </head>
+    <body>
+        <main>
+        {{range .Links}}
+            {{template "link" .}}
+        {{end}}
+        </main>
+    </body>
+</html>
 {{end}}
