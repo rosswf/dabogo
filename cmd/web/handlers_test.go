@@ -42,15 +42,20 @@ func TestHomeHandler(t *testing.T) {
 		t.Errorf("got: %d, want: %d", res.StatusCode, http.StatusOK)
 	}
 
-	// Check that the response body contains "https://google.co.uk"
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		t.Fatal(err)
 	}
 
+	// Check that the response body contains "https://google.co.uk"
 	got := string(body)
 	want := "https://google.co.uk"
 
+	if !strings.Contains(got, want) {
+		t.Errorf("got: %s, want: %s", got, want)
+	}
+
+	want = "https://bbc.co.uk"
 	if !strings.Contains(got, want) {
 		t.Errorf("got: %s, want: %s", got, want)
 	}
