@@ -7,8 +7,9 @@ import (
 
 // A Link contains the information to construct a HTML hyperlink.
 type Link struct {
-	Name string `yaml:"name" dabogo:"required"`
-	Url  string `yaml:"url" dabogo:"required"`
+	Name  string `yaml:"name" dabogo:"required"`
+	Url   string `yaml:"url" dabogo:"required"`
+	Color string `yaml:"color"`
 }
 
 // checkRequired returns an error containing the name of the missing field and the Link
