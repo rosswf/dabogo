@@ -21,7 +21,10 @@ func main() {
 	}
 
 	cfg := models.NewConfig()
-	cfg.Load(f)
+	err = cfg.Load(f)
+	if err != nil {
+		panic(err)
+	}
 
 	template, err := newTemplate()
 	if err != nil {
@@ -39,5 +42,8 @@ func main() {
 	mux.HandleFunc("/", app.home)
 	mux.Handle("/static/", fileServer)
 
-	http.ListenAndServe(":8080", mux)
+	err = http.ListenAndServe(":8080", mux)
+	if err != nil {
+		panic(err)
+	}
 }
