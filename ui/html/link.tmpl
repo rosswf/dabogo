@@ -1,5 +1,9 @@
 {{define "link"}}
-<div class="link">
+<div class="link"
+    {{with .Color}}
+    style="background-color: {{.}};"
+    {{end}}
+>
     <a href="{{.Url}}">
         {{.Name}}
     </a>
