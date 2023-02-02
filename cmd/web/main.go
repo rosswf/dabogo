@@ -2,6 +2,7 @@ package main
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 	"os"
 
@@ -12,6 +13,7 @@ import (
 type application struct {
 	config   *models.Config
 	template *template.Template
+	infoLog  *log.Logger
 }
 
 func main() {
@@ -31,9 +33,12 @@ func main() {
 		panic(err)
 	}
 
+	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+
 	app := application{
 		config:   cfg,
 		template: template,
+		infoLog:  infoLog,
 	}
 
 	fileServer := http.FileServer(http.FS(ui.Files))
@@ -42,7 +47,9 @@ func main() {
 	mux.HandleFunc("/", app.home)
 	mux.Handle("/static/", fileServer)
 
-	err = http.ListenAndServe(":8080", mux)
+	loggedMux := app.logRequest(mux)
+
+	err = http.ListenAndServe(":8080", loggedMux)
 	if err != nil {
 		panic(err)
 	}
