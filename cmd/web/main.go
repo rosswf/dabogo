@@ -10,6 +10,10 @@ import (
 	"github.com/rosswf/dabogo/ui"
 )
 
+const (
+	addr = ":8080"
+)
+
 type application struct {
 	config   *models.Config
 	template *template.Template
@@ -49,7 +53,8 @@ func main() {
 
 	loggedMux := app.logRequest(mux)
 
-	err = http.ListenAndServe(":8080", loggedMux)
+	infoLog.Printf("Listening on %s", addr)
+	err = http.ListenAndServe(addr, loggedMux)
 	if err != nil {
 		panic(err)
 	}
